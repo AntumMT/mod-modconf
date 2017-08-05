@@ -1,5 +1,5 @@
-title = 'Mod Configuration Reader for Minetest mods'
-project = 'ModConf'
+title = 'ModConf'
+project = 'Mod Configuration Reader for Minetest mods'
 format = 'markdown'
 not_luadoc = true
 
