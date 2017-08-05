@@ -21,3 +21,5 @@ local scripts = {
 for i, s in ipairs(scripts) do
 	dofile(modconf.path .. '/' .. s .. '.lua')
 end
+
+modconf.readConfig(modconf)
