@@ -10,6 +10,44 @@ A Minetest mod that reads settings from 'mod.conf'.
 
 
 ---
+### **Example Usage:***
+
+*depends.txt:*
+```
+modconf?
+```
+
+*init.lua* (using core object function provided by ***modconf***):
+```lua
+-- Main global object table
+mymod = {}
+
+-- Create settings object from core function
+if minetest.global_exists('modconf') or minetest.get_modpath('modconf') then
+	mymod.settings = minetest.get_mod_settings()
+end
+
+mymod.name = mymod.settings:get('name')
+mymod.version = mymod.settings:get('version')
+
+minetest.log('action', 'Loading ' .. mymod.name .. ' version ' .. mymod.version)
+```
+
+*init.lua* (using ***modconf.readConfig***):
+```lua
+-- Main global object table
+mymod = {}
+
+-- Read fields into table from 'mod.conf'
+if minetest.global_exists('modconf') then
+    modconf.readConfig(mymod)
+end
+
+minetest.log('action', 'Loading ' .. mymod.name .. ' version ' .. mymod.version)
+```
+
+
+---
 ### **Documentation:**
 
 [API Documentation](https://antummt.github.io/mod-modconf/api.html)
