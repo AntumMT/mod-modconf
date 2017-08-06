@@ -1,4 +1,4 @@
-## Mod Conf (*modconf*) mod for [Minetest][]
+## Mod Configuration Reader (*modconf*) mod for [Minetest][]
 
 
 ---
