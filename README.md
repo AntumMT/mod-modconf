@@ -6,7 +6,7 @@
 
 A Minetest mod that reads settings from 'mod.conf'.
 
-**NOTE:** This mod is a ***work-in-progress*** & may not function correctly.
+**NOTE:** This mod is a ***work-in-progress*** but is functional. Currently, in order to use ***modconf.readConfig***, key-value instances in *mod.conf* must be delimited by an equals symbol with one whitespace on both sides (e.g. " = "). In the future, trimming out whitespace will be done automatically.
 
 
 ---
