@@ -48,9 +48,17 @@ minetest.log('action', 'Loading ' .. mymod.name .. ' version ' .. mymod.version)
 
 
 ---
-### **Documentation:**
+### **Links:**
 
-[API Documentation](https://antummt.github.io/mod-modconf/api.html)
+- Downloads:
+  - Current: [zip][dl.current.zip] | [tarball][dl.current.tar]
+- Pages:
+  - [Forum](https://forum.minetest.net/viewtopic.php?t=18247)
+- Documentation:
+  - [API](https://antummt.github.io/mod-modconf/api.html)
 
 
 [Minetest]: http://www.minetest.net/
+
+[dl.current.zip]: https://github.com/AntumMT/mod-modconf/zipball/master
+[dl.current.tar]: https://github.com/AntumMT/mod-modconf/tarball/master
