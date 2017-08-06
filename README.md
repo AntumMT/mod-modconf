@@ -2,7 +2,7 @@
 
 
 ---
-### **Description:***
+### **Description:**
 
 A Minetest mod that reads settings from 'mod.conf'.
 
@@ -10,7 +10,7 @@ A Minetest mod that reads settings from 'mod.conf'.
 
 
 ---
-### **Example Usage:***
+### **Example Usage:**
 
 *depends.txt:*
 ```
