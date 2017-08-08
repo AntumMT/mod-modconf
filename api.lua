@@ -21,7 +21,12 @@ end
 --
 -- @function modconf.readConfig
 -- @param object
+-- @treturn table
 function modconf.readConfig(object)
+	if object == nil then
+		object = {}
+	end
+	
 	local conf_exists = false
 	local conf_lines = {}
 	local conf_path = getModPath() .. '/mod.conf'
@@ -46,6 +51,8 @@ function modconf.readConfig(object)
 			object[conf_key[1]] = conf_key[2]
 		end
 	end
+	
+	return object
 end
 
 
