@@ -73,6 +73,70 @@ function modconf.readConfig(object)
 end
 
 
+if not core.get_mod_defaults then
+	--- Reads default settings from local ***settingtypes.txt*** file.
+	--
+	-- FIXME: Unfinished
+	--
+	-- @function core.get_mod_defaults
+	-- @tparam table object Default settings object to be formatted (Can be a *table* or *nil*).
+	-- @treturn table Default settings object.
+	function core.get_mod_defaults(object)
+		if object == nil then
+			object = {}
+		end
+		
+		local lines = {}
+		local file_path = getFilePath('settingtypes.txt')
+		
+		if file_path then
+			for line in io.lines(file_path) do
+				local comment = string.find(line, '#') == 1
+				if line and line ~= '' and not comment then
+					table.insert(lines, line)
+				end
+			end
+		end
+		
+		for i, line in ipairs(lines) do
+			local key = string.split(line, ' (')
+			local temp = string.split(string.split(key[2], ') ')[2], ' ')
+			key = key[1]
+			local value = nil
+			
+			if #temp >= 2 then
+				local k_type = temp[1]
+				local value = temp[2]
+				
+				-- FIXME: How to convert to float (math.tofloat(string)?)
+				if k_type == 'int' then
+					-- Convert integers
+					value = tonumber(value)
+				elseif k_type == 'bool' then
+					-- Convert booleans
+					if value == 'true' then
+						value = true
+					else
+						value = false
+					end
+				end
+				
+				-- Append field to object
+				object[key] = value
+			end
+		end
+		
+		return object
+	end
+	
+	--- Alias of ***core.get_mod_defaults***.
+	--
+	-- @function minetest.get_mod_defaults
+	-- @see core.get_mod_defaults
+	minetest.get_mod_defaults = core.get_mod_defaults
+end
+
+
 if not core.get_mod_settings then
 	--- Creates a settings object from the local ***mod.conf*** file.
 	--
@@ -82,7 +146,7 @@ if not core.get_mod_settings then
 		return Settings(core.get_modpath(minetest.get_current_modname()) .. '/mod.conf')
 	end
 	
-	--- Alias of ***core.get_mod_settings***
+	--- Alias of ***core.get_mod_settings***.
 	--
 	-- @function minetest.get_mod_settings
 	-- @see core.get_mod_settings
