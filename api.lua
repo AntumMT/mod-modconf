@@ -17,11 +17,6 @@ local function getModPath()
 end
 
 
-local function getFilePath(file_name)
-	return getModPath() .. '/' .. file_name
-end
-
-
 local function fileExists(file_path)
 	local f_exists = false
 	
@@ -32,6 +27,17 @@ local function fileExists(file_path)
 	end
 	
 	return f_exists
+end
+
+
+local function getFilePath(file_name)
+	local file_path = getModPath() .. '/' .. file_name
+	
+	if not fileExists(file_path) then
+		return
+	end
+	
+	return file_path
 end
 
 
@@ -48,7 +54,7 @@ function modconf.readConfig(object)
 	local conf_lines = {}
 	local conf_path = getFilePath('mod.conf')
 	
-	if fileExists(conf_path) then
+	if conf_path then
 		for line in io.lines(conf_path) do
 			table.insert(conf_lines, line)
 		end
