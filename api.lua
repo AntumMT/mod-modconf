@@ -17,6 +17,24 @@ local function getModPath()
 end
 
 
+local function getFilePath(file_name)
+	return getModPath() .. '/' .. file_name
+end
+
+
+local function fileExists(file_path)
+	local f_exists = false
+	
+	local f = io.open(file_path, 'r')
+	if f then
+		f:close()
+		f_exists = true
+	end
+	
+	return f_exists
+end
+
+
 --- Adds fields to the main mod object.
 --
 -- @function modconf.readConfig
@@ -27,17 +45,10 @@ function modconf.readConfig(object)
 		object = {}
 	end
 	
-	local conf_exists = false
 	local conf_lines = {}
-	local conf_path = getModPath() .. '/mod.conf'
+	local conf_path = getFilePath('mod.conf')
 	
-	local conf = io.open(conf_path, 'r')
-	if conf then
-		conf:close()
-		conf_exists = true
-	end
-	
-	if conf_exists then
+	if fileExists(conf_path) then
 		for line in io.lines(conf_path) do
 			table.insert(conf_lines, line)
 		end
