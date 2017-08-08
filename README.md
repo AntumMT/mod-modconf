@@ -33,18 +33,18 @@ mymod = modconf.getModMetaData()
 minetest.log('action', 'Loading ' .. mymod.name .. ' version ' .. mymod.version)
 ```
 
-*init.lua* (reading *settingtypes.txt* file with ***minetest.get_mod_defaults***):
+*init.lua* (reading *settingtypes.txt* file with ***modconf.getModDefaults***):
 ```lua
 -- Table object to read fields into
 local defaults = {}
 
 -- Read fields into table from 'settingtypes.txt'
 if minetest.get_modpath('modconf') then
-    minetest.get_mod_defaults(defaults)
+    modconf.getModDefaults(defaults)
 end
 
 -- Alternatively can be called in this manner
-local defaults = minetest.get_mod_defaults()
+local defaults = modconf.getModDefaults()
 ```
 
 ---

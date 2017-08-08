@@ -88,65 +88,72 @@ if not core.get_mod_metadata then
 end
 
 
-if not core.get_mod_defaults then
-	--- Reads default settings from local ***settingtypes.txt*** file.
-	--
-	-- FIXME: Unfinished
-	--
-	-- @function core.get_mod_defaults
-	-- @tparam table object Default settings object to be formatted (Can be a *table* or *nil*).
-	-- @treturn table Default settings object.
-	function core.get_mod_defaults(object)
-		if object == nil then
-			object = {}
-		end
-		
-		local lines = {}
-		local file_path = getFilePath('settingtypes.txt')
-		
-		if file_path then
-			for line in io.lines(file_path) do
-				local comment = string.find(line, '#') == 1
-				if line and line ~= '' and not comment then
-					table.insert(lines, line)
-				end
-			end
-		end
-		
-		for i, line in ipairs(lines) do
-			local key = string.split(line, ' (')
-			local temp = string.split(string.split(key[2], ') ')[2], ' ')
-			key = key[1]
-			local value = nil
-			
-			if #temp >= 2 then
-				local k_type = temp[1]
-				local value = temp[2]
-				
-				-- FIXME: How to convert to float (math.tofloat(string)?)
-				if k_type == 'int' then
-					-- Convert integers
-					value = tonumber(value)
-				elseif k_type == 'bool' then
-					-- Convert booleans
-					if value == 'true' then
-						value = true
-					else
-						value = false
-					end
-				end
-				
-				-- Append field to object
-				object[key] = value
-			end
-		end
-		
-		return object
+--- Reads default settings from local ***settingtypes.txt*** file.
+--
+-- FIXME: Unfinished
+--
+-- @function modconf.getModDefaults
+-- @tparam table object Default settings object to be formatted (Can be a *table* or *nil*).
+-- @treturn table Default settings object.
+function modconf.getModDefaults(object)
+	if object == nil then
+		object = {}
 	end
 	
-	--- Alias of ***core.get_mod_defaults***.
+	local lines = {}
+	local file_path = getFilePath('settingtypes.txt')
+	
+	if file_path then
+		for line in io.lines(file_path) do
+			local comment = string.find(line, '#') == 1
+			if line and line ~= '' and not comment then
+				table.insert(lines, line)
+			end
+		end
+	end
+	
+	for i, line in ipairs(lines) do
+		local key = string.split(line, ' (')
+		local temp = string.split(string.split(key[2], ') ')[2], ' ')
+		key = key[1]
+		local value = nil
+		
+		if #temp >= 2 then
+			local k_type = temp[1]
+			local value = temp[2]
+			
+			-- FIXME: How to convert to float (math.tofloat(string)?)
+			if k_type == 'int' then
+				-- Convert integers
+				value = tonumber(value)
+			elseif k_type == 'bool' then
+				-- Convert booleans
+				if value == 'true' then
+					value = true
+				else
+					value = false
+				end
+			end
+			
+			-- Append field to object
+			object[key] = value
+		end
+	end
+	
+	return object
+end
+
+
+if not core.get_mod_defaults then
+	--- Alias of ***modconf.getModDefaults***.
 	--
 	-- @function minetest.get_mod_defaults
-	-- @see core.get_mod_defaults
-	minetest.get_mod_defaults = core.get_mod_defaults
+	-- @see modconf.getModDefaults
+	core.get_mod_defaults = modconf.getModDefaults
+	
+	--- Alias of ***modconf.getModDefaults***.
+	--
+	-- @function minetest.get_mod_defaults
+	-- @see modconf.getModDefaults
+	minetest.get_mod_defaults = modconf.getModDefaults
 end
