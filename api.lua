@@ -73,6 +73,21 @@ function modconf.getModMetaData(object)
 end
 
 
+if not core.get_mod_metadata then
+	--- Alias of ***modconf.getModMetaData***.
+	--
+	-- @function core.get_mod_metadata
+	-- @see modconf.getModMetaData
+	core.get_mod_metadata = modconf.getModMetaData
+	
+	--- Alias of ***modconf.getModMetaData***.
+	--
+	-- @function minetest.get_mod_metadata
+	-- @see modconf.getModMetaData
+	minetest.get_mod_metadata = modconf.getModMetaData
+end
+
+
 if not core.get_mod_defaults then
 	--- Reads default settings from local ***settingtypes.txt*** file.
 	--
@@ -134,21 +149,4 @@ if not core.get_mod_defaults then
 	-- @function minetest.get_mod_defaults
 	-- @see core.get_mod_defaults
 	minetest.get_mod_defaults = core.get_mod_defaults
-end
-
-
-if not core.get_mod_metadata then
-	--- Creates a settings object from the local ***mod.conf*** file.
-	--
-	-- @function core.get_mod_metadata
-	-- @treturn settings_object
-	function core.get_mod_metadata()
-		return Settings(core.get_modpath(minetest.get_current_modname()) .. '/mod.conf')
-	end
-	
-	--- Alias of ***core.get_mod_metadata***.
-	--
-	-- @function minetest.get_mod_metadata
-	-- @see core.get_mod_metadata
-	minetest.get_mod_metadata = core.get_mod_metadata
 end

@@ -17,36 +17,23 @@ A Minetest mod that reads data from ***mod.conf*** & ***settingtypes.txt*** file
 modconf?
 ```
 
-*init.lua* (using core object function provided by ***modconf***):
+*init.lua* (read *mod.conf* file using ***modconf.getModMetaData***):
 ```lua
 -- Main global object table
 mymod = {}
 
 -- Create settings object from core function
-if minetest.global_exists('modconf') or minetest.get_modpath('modconf') then
-	mymod.settings = minetest.get_mod_metadata()
-end
-
-mymod.name = mymod.settings:get('name')
-mymod.version = mymod.settings:get('version')
-
-minetest.log('action', 'Loading ' .. mymod.name .. ' version ' .. mymod.version)
-```
-
-*init.lua* (using ***modconf.getModMetaData***):
-```lua
--- Main global object table
-mymod = {}
-
--- Read fields into table from 'mod.conf'
 if minetest.global_exists('modconf') then
-    modconf.getModMetaData(mymod)
+	modconf.getModMetaData(mymod)
 end
+
+-- Alternatively can be called in this manner
+mymod = modconf.getModMetaData()
 
 minetest.log('action', 'Loading ' .. mymod.name .. ' version ' .. mymod.version)
 ```
 
-*init.lua* (reading *settingtypes.txt* file):
+*init.lua* (reading *settingtypes.txt* file with ***minetest.get_mod_defaults***):
 ```lua
 -- Table object to read fields into
 local defaults = {}
