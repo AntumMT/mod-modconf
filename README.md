@@ -6,7 +6,7 @@
 
 A Minetest mod that reads data from ***mod.conf*** & ***settingtypes.txt*** files.
 
-**NOTE:** This mod is a ***work-in-progress*** but is functional. Currently, in order to use ***modconf.readConfig***, key-value instances in *mod.conf* must be delimited by an equals symbol with one whitespace on both sides (e.g. " = "). In the future, trimming out whitespace will be done automatically.
+**NOTE:** This mod is a ***work-in-progress*** but is functional. Currently, in order to use ***modconf.getModMetaData***, key-value instances in *mod.conf* must be delimited by an equals symbol with one whitespace on both sides (e.g. " = "). In the future, trimming out whitespace will be done automatically.
 
 
 ---
@@ -33,14 +33,14 @@ mymod.version = mymod.settings:get('version')
 minetest.log('action', 'Loading ' .. mymod.name .. ' version ' .. mymod.version)
 ```
 
-*init.lua* (using ***modconf.readConfig***):
+*init.lua* (using ***modconf.getModMetaData***):
 ```lua
 -- Main global object table
 mymod = {}
 
 -- Read fields into table from 'mod.conf'
 if minetest.global_exists('modconf') then
-    modconf.readConfig(mymod)
+    modconf.getModMetaData(mymod)
 end
 
 minetest.log('action', 'Loading ' .. mymod.name .. ' version ' .. mymod.version)

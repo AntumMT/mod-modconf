@@ -43,10 +43,10 @@ end
 
 --- Adds fields to the main mod object.
 --
--- @function modconf.readConfig
+-- @function modconf.getModMetaData
 -- @param object
 -- @treturn table
-function modconf.readConfig(object)
+function modconf.getModMetaData(object)
 	if object == nil then
 		object = {}
 	end
