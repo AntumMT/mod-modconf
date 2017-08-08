@@ -137,18 +137,18 @@ if not core.get_mod_defaults then
 end
 
 
-if not core.get_mod_settings then
+if not core.get_mod_metadata then
 	--- Creates a settings object from the local ***mod.conf*** file.
 	--
-	-- @function core.get_mod_settings
+	-- @function core.get_mod_metadata
 	-- @treturn settings_object
-	function core.get_mod_settings()
+	function core.get_mod_metadata()
 		return Settings(core.get_modpath(minetest.get_current_modname()) .. '/mod.conf')
 	end
 	
-	--- Alias of ***core.get_mod_settings***.
+	--- Alias of ***core.get_mod_metadata***.
 	--
-	-- @function minetest.get_mod_settings
-	-- @see core.get_mod_settings
-	minetest.get_mod_settings = core.get_mod_settings
+	-- @function minetest.get_mod_metadata
+	-- @see core.get_mod_metadata
+	minetest.get_mod_metadata = core.get_mod_metadata
 end

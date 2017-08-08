@@ -24,7 +24,7 @@ mymod = {}
 
 -- Create settings object from core function
 if minetest.global_exists('modconf') or minetest.get_modpath('modconf') then
-	mymod.settings = minetest.get_mod_settings()
+	mymod.settings = minetest.get_mod_metadata()
 end
 
 mymod.name = mymod.settings:get('name')
