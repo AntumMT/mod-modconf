@@ -4,7 +4,7 @@
 ---
 ### **Description:**
 
-A Minetest mod that reads settings from 'mod.conf'.
+A Minetest mod that reads data from ***mod.conf*** & ***settingtypes.txt*** files.
 
 **NOTE:** This mod is a ***work-in-progress*** but is functional. Currently, in order to use ***modconf.readConfig***, key-value instances in *mod.conf* must be delimited by an equals symbol with one whitespace on both sides (e.g. " = "). In the future, trimming out whitespace will be done automatically.
 
@@ -46,6 +46,19 @@ end
 minetest.log('action', 'Loading ' .. mymod.name .. ' version ' .. mymod.version)
 ```
 
+*init.lua* (reading *settingtypes.txt* file):
+```lua
+-- Table object to read fields into
+local defaults = {}
+
+-- Read fields into table from 'settingtypes.txt'
+if minetest.get_modpath('modconf') then
+    minetest.get_mod_defaults(defaults)
+end
+
+-- Alternatively can be called in this manner
+local defaults = minetest.get_mod_defaults()
+```
 
 ---
 ### **Links:**
