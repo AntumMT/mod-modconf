@@ -23,6 +23,25 @@ function strip(s)
 end
 
 
+local function isFloat(s_value)
+	if not string.find(s_value, '.') then return false end
+	
+	local s_list = string.split(s_value, '.')
+	local s_length = #s_list
+	if s_length < 1 then
+		return false
+	elseif s_length == 1 then
+		table.insert(s_list, '0')
+	end
+	
+	for i, num in ipairs(s_list) do
+		if tonumber(num) == nil then return false end
+	end
+	
+	return true
+end
+
+
 local function getModPath()
 	return core.get_modpath(core.get_current_modname())
 end
@@ -132,7 +151,6 @@ function modconf.getModDefaults(object)
 			local k_type = temp[1]
 			local value = temp[2]
 			
-			-- FIXME: How to convert to float (math.tofloat(string)?)
 			if k_type == 'int' then
 				-- Convert integers
 				value = tonumber(value)
@@ -143,6 +161,16 @@ function modconf.getModDefaults(object)
 				else
 					value = false
 				end
+			elseif k_type == 'float' and isFloat(value) then
+				-- FIXME: How to convert to float (math.tofloat(string)?)
+				--        Currently converts to table.
+				value = string.split(value, '.')
+				for i, v in ipairs(value) do
+					value[i] = tonumber(v)
+					print(type(value[i]))
+				end
+				--value = {value[1], value[2]}
+				value = table.concat({value[1], value[2]}, '.')
 			end
 			
 			-- Append field to object
