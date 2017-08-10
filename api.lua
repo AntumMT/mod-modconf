@@ -12,17 +12,6 @@
 -- @script api.lua
 
 
---- Trims leading & trailing whitespace from string.
---
--- See: [Lua Users Wiki](http://lua-users.org/wiki/StringTrim)
--- @function strip
--- @local
--- @tparam string s String to be trimmed.
-function strip(s)
-  return (s:gsub('^%s*(.-)%s*$', '%1'))
-end
-
-
 local function isFloat(s_value)
 	if not string.find(s_value, '.') then return false end
 	
@@ -94,7 +83,7 @@ function modconf.getModMetaData(object)
 		local conf_key = string.split(line, '=')
 		if #conf_key > 1 then
 			-- Append field to object
-			object[strip(conf_key[1])] = strip(conf_key[2])
+			object[conf_key[1]:trim()] = conf_key[2]:trim()
 		end
 	end
 	
