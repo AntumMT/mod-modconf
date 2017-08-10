@@ -145,11 +145,7 @@ function modconf.getModDefaults(object)
 				value = tonumber(value)
 			elseif k_type == 'bool' then
 				-- Convert booleans
-				if value == 'true' then
-					value = true
-				else
-					value = false
-				end
+				value = core.is_yes(value)
 			elseif k_type == 'float' and isFloat(value) then
 				-- FIXME: How to convert to float (math.tofloat(string)?)
 				--        Currently converts to table.
