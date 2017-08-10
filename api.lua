@@ -116,7 +116,7 @@ function modconf.getModDefaults(object)
 	if file_path then
 		for line in io.lines(file_path) do
 			local comment = string.find(line, '#') == 1
-			if line and line ~= '' and not comment then
+			if line and and not comment and string.match(line, '^([a-zA-Z])') then
 				table.insert(lines, line)
 			end
 		end
