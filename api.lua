@@ -12,6 +12,17 @@
 -- @script api.lua
 
 
+--- Trims leading & trailing whitespace from string.
+--
+-- See: [Lua Users Wiki](http://lua-users.org/wiki/StringTrim)
+-- @function strip
+-- @local
+-- @tparam string s String to be trimmed.
+function strip(s)
+  return (s:gsub('^%s*(.-)%s*$', '%1'))
+end
+
+
 local function getModPath()
 	return core.get_modpath(core.get_current_modname())
 end
@@ -61,11 +72,10 @@ function modconf.getModMetaData(object)
 	end
 	
 	for i, line in ipairs(conf_lines) do
-		-- FIXME: Remove preceding & following whitespace automatically
-		local conf_key = string.split(line, ' = ')
+		local conf_key = string.split(line, '=')
 		if #conf_key > 1 then
 			-- Append field to object
-			object[conf_key[1]] = conf_key[2]
+			object[strip(conf_key[1])] = strip(conf_key[2])
 		end
 	end
 	
